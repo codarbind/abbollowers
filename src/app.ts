@@ -71,6 +71,6 @@ app.patch("/account/:userId", updateAccountDetails(account))
 //Relationship Routes
 app.post("/relation/:userId/follow",followUser(relationship))
 app.post("/relation/:userId/unfollow",unfollowUser(relationship))
-app.get("/relation/:userId",getFollowers(relationship))
-app.get("/relation/:userId",getFollowing(relationship))
+app.get("/relation/:userId/followers",getFollowers(relationship))
+app.get("/relation/:userId/followings",getFollowing(relationship))
 export default app;

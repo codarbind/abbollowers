@@ -41,6 +41,7 @@ export const getFollowers = (relationshipService: RelationshipService) =>
     const userId = (req.params.userId);
     const followers = await relationshipService.getFollowers(userId);
     res.json(followers);
+    return
   } catch (error:any) {
     res.status(500).json({ error: error.message });
   }

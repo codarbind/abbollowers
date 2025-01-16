@@ -19,7 +19,7 @@ export class RelationshipService {
     const following = await userRepo.findOne({ where: { id: followingId } });
 
     if (!follower || !following) {
-      throw new Error("Invalid follower or followee ID");
+      throw new Error("Invalid follower or following ID");
     }
 
     const relationship = this.relationshipRepo.create({ follower, following });
@@ -45,7 +45,7 @@ export class RelationshipService {
    
     return await this.relationshipRepo.find({
       where: { follower: { id: userId } },
-      relations: ["followee"],
+      relations: ["following"],
     });
   }
 }

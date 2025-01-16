@@ -15,6 +15,7 @@ export class AccountService {
   async isAccountOwner(req:Request){
 
     const sessionUser = req.session.user
+
     if(!sessionUser) return null
     const requestedUserId = req.params.userId
 
