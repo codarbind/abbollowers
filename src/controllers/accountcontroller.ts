@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import { AccountService } from "../services/accountservice";
+import validateGetAccount from "../validations/getaccount";
+import validateUpdateAccount from "../validations/accountupdate";
 
-export const getAccountDetails = (accountService: AccountService) => async (req: Request, res: Response) => {
+export const getAccountDetails = (accountService: AccountService) => 
+[validateGetAccount,  
+  async (req: Request, res: Response) => {
   try {
     const userId = (req.params.userId);
     const account = await accountService.getAccountDetails(userId);
@@ -17,9 +21,11 @@ export const getAccountDetails = (accountService: AccountService) => async (req:
     return;
     
   }
-};
+}];
 
-export const updateAccountDetails = (accountService: AccountService) => async (req: Request, res: Response) => {
+export const updateAccountDetails = (accountService: AccountService) =>
+[validateUpdateAccount,  
+  async (req: Request, res: Response) => {
   try {
     const userId = (req.params.userId);
     const isAccountOwner = await accountService.isAccountOwner(req)
@@ -38,4 +44,4 @@ export const updateAccountDetails = (accountService: AccountService) => async (r
   } catch (error:any) {
     res.status(500).json({ error: error.message });
   }
-};
+}];

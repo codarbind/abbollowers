@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { User } from "../models/user";
 import { envconfig } from "./env";
+import { Relationship } from "../models/relationship";
 
 const {postgres_db_host,postgres_db_user,postgres_db_password,postgres_db} = envconfig
 
@@ -13,6 +14,6 @@ export const AppDataSource = new DataSource({
   database: postgres_db,
   synchronize: true,
   logging: false,
-  entities: [User],
+  entities: [User,Relationship],
   ssl:true
 });

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Relationship } from "./relationship";
 
 @Entity()
 export class User {
@@ -16,4 +17,10 @@ export class User {
 
   @Column({length:250,default:'bio empty'})
   bio!:string;
+
+  @OneToMany(() => Relationship, (relationship) => relationship.follower)
+  followers!: Relationship[];
+
+  @OneToMany(() => Relationship, (relationship) => relationship.following)
+  following!: Relationship[];
 }

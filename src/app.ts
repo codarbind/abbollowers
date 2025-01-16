@@ -8,8 +8,9 @@ import hashservice from "./services/hashservice";
 import { envconfig } from "./config/env";
 import { getAccountDetails, updateAccountDetails } from "./controllers/accountcontroller";
 import { AccountService } from "./services/accountservice";
-import validateUpdateAccount from "./validations/accountupdate";
-import validateGetAccount from "./validations/getaccount";
+import { followUser, getFollowers, getFollowing, unfollowUser } from "./controllers/relationshipcontroller";
+import { RelationshipService } from "./services/relationshipservice";
+import { Relationship } from "./models/relationship";
 
 
 const app = express()
@@ -20,6 +21,7 @@ AppDataSource.initialize()
   .catch((error) => console.error("Database connection error", error));
 
 let userrepo = AppDataSource.getRepository(User)
+let relationshipRepo = AppDataSource.getRepository(Relationship)
 
 declare module "express-session" {
   interface SessionData {
@@ -55,11 +57,20 @@ app.use(
 
 //services instantiation
 const auth = new AuthService(userrepo,hashservice)
-const account = new AccountService(userrepo)
+export const account = new AccountService(userrepo)
+const relationship = new RelationshipService(relationshipRepo,userrepo)
 
-// Routes
+//Auth Routes
 app.post("/auth/register",  register(auth));
 app.post("/auth/login", login(auth));
-app.get("/account/:userId",validateGetAccount ,getAccountDetails(account))
-app.patch("/account/:userId", validateUpdateAccount,updateAccountDetails(account))
+
+//Account Routes
+app.get("/account/:userId" ,getAccountDetails(account))
+app.patch("/account/:userId", updateAccountDetails(account))
+
+//Relationship Routes
+app.post("/relation/:userId/follow",followUser(relationship))
+app.post("/relation/:userId/unfollow",unfollowUser(relationship))
+app.get("/relation/:userId",getFollowers(relationship))
+app.get("/relation/:userId",getFollowing(relationship))
 export default app;
