@@ -43,6 +43,7 @@ export class AuthService {
     req.session.user = {
       email: user.email
     }
+    req.session.save()
 return 
   }
 }

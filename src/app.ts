@@ -6,6 +6,10 @@ import { AuthService } from "./services/authservice";
 import { User } from "./models/user";
 import hashservice from "./services/hashservice";
 import { envconfig } from "./config/env";
+import { getAccountDetails, updateAccountDetails } from "./controllers/accountcontroller";
+import { AccountService } from "./services/accountservice";
+import validateUpdateAccount from "./validations/accountupdate";
+import validateGetAccount from "./validations/getaccount";
 
 
 const app = express()
@@ -49,10 +53,13 @@ app.use(
   })
 );
 
-// Routes
+//services instantiation
 const auth = new AuthService(userrepo,hashservice)
+const account = new AccountService(userrepo)
 
+// Routes
 app.post("/auth/register",  register(auth));
-
 app.post("/auth/login", login(auth));
+app.get("/account/:userId",validateGetAccount ,getAccountDetails(account))
+app.patch("/account/:userId", validateUpdateAccount,updateAccountDetails(account))
 export default app;

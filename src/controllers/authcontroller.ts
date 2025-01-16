@@ -7,7 +7,6 @@ export const register = (authService: AuthService) => async (req: Request, res: 
   try {
     const { email, password, username } = req.body;
     const user = await authService.register(email, password, username);
-    console.log({user})
     authService.createSession(req,user)
      res.status(201).json(user);
      return;
