@@ -35,7 +35,7 @@ export const unfollowUser = (relationshipService: RelationshipService) =>
 }]
 
 export const getFollowers = (relationshipService: RelationshipService) => 
- [authorized,validateUserIdParam,   
+ [validateUserIdParam,   
     async (req: Request, res: Response) => {
   try {
     const userId = (req.params.userId);
@@ -48,7 +48,7 @@ export const getFollowers = (relationshipService: RelationshipService) =>
 }];
 
 export const getFollowing = (relationshipService: RelationshipService) =>
-[authorized,validateUserIdParam,    
+[validateUserIdParam,    
     async (req: Request, res: Response) => {
   try {
     const userId = (req.params.userId);

@@ -13,7 +13,9 @@ export const getAccountDetails = (accountService: AccountService) =>
         res.status(404).json({ error: "User not found" });
       return;
     }
-      res.json(account);
+    const isAccountOwner = await accountService.isAccountOwner(req)
+    const requestingUser = await accountService.getRequestingUser(req)
+      res.json({...account,isAccountOwner,userId:requestingUser?.id});
       return;
     
   } catch (error:any) {

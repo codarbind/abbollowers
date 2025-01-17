@@ -23,6 +23,16 @@ export class AccountService {
     return sessionUser.email === requestedAccount?.email
   }
 
+  async getRequestingUser(req:Request){
+
+    const sessionUser = req.session.user
+    if(!sessionUser) return null
+    let requestingUser= await this.userRepository.findOne({ where: { email: sessionUser.email } });
+   if(!requestingUser) return null
+    let {password:_,...cleanRequestingUser} = requestingUser
+    return cleanRequestingUser
+  }
+
   async getAccountDetails(userId: string): Promise<Partial<User> | null> {
     const account = await this.userRepository.findOne({ where: { id: userId } });
     if(!account) return null
