@@ -1,0 +1,66 @@
+GET http://localhost:3000/health HTTP/1.1
+
+
+#### user signs up
+POST http://localhost:3000/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "password":"mypass",
+
+    "username":"username6",
+
+    "email":"theemail6@dot.com"
+}
+
+### user login
+
+POST http://localhost:3000/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "password":"mypass",
+
+    "username":"username",
+
+    "email":"theemail@dot.com"
+}
+
+### user get acc
+
+GET http://localhost:3000/account/1a23b642-89fa-444a-8882-3b3aa10785bb HTTP/1.1
+
+
+
+### update/patch user
+
+PATCH http://localhost:3000/account/1a23b642-89fa-444a-8882-3b3aa10785bb HTTP/1.1
+Content-Type: application/json
+
+{
+    "bio":"i am a great software engineer"
+}
+
+### get followers
+GET http://localhost:3000/relation/1a23b642-89fa-444a-8882-3b3aa10785bb/followers HTTP/1.1
+
+
+### get followings
+GET http://localhost:3000/relation/1a23b642-89fa-444a-8882-3b3aa10785bb/followings HTTP/1.1
+
+### follow a user
+POST http://localhost:3000/relation/1a23b642-89fa-444a-8882-3b3aa10785bb/follow HTTP/1.1
+Content-Type: application/json
+
+{
+    "followingId": "2d08e945-a67c-432b-8f21-7f12c3f5b6a7"
+}
+
+
+### unfollow a user
+POST http://localhost:3000/relation/1a23b642-89fa-444a-8882-3b3aa10785bb/unfollow HTTP/1.1
+Content-Type: application/json
+
+{
+    "followingId": "2d08e945-a67c-432b-8f21-7f12c3f5b6a7"
+}
