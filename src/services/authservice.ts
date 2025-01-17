@@ -25,7 +25,7 @@ export class AuthService {
   }
     const hashedPassword =await this.hashservice.hashPassword(password)
     const user = this.userRepository.create({ email, password: hashedPassword,username });
-    let savedUser = await this.userRepository.save(user);
+    const savedUser = await this.userRepository.save(user);
     const { password: _, ...userWithoutPassword } = savedUser;
     return userWithoutPassword;
   }

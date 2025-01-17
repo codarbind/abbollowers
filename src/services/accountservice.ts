@@ -27,16 +27,16 @@ export class AccountService {
 
     const sessionUser = req.session.user
     if(!sessionUser) return null
-    let requestingUser= await this.userRepository.findOne({ where: { email: sessionUser.email } });
+    const requestingUser= await this.userRepository.findOne({ where: { email: sessionUser.email } });
    if(!requestingUser) return null
-    let {password:_,...cleanRequestingUser} = requestingUser
+    const {password:_,...cleanRequestingUser} = requestingUser
     return cleanRequestingUser
   }
 
   async getAccountDetails(userId: string): Promise<Partial<User> | null> {
     const account = await this.userRepository.findOne({ where: { id: userId } });
     if(!account) return null
-    let {password:_,...acc} = account
+    const {password:_,...acc} = account
     return acc
   }
 
@@ -48,7 +48,7 @@ export class AccountService {
 
     Object.assign(user, data);
     await this.userRepository.save(user);
-    let {password:_,...userUpdate} = user
+    const {password:_,...userUpdate} = user
     return userUpdate;
   }
 }

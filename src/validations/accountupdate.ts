@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { z, ZodError } from 'zod';
+import { z } from 'zod';
 
 export type UpdateAccountType = z.infer<typeof updateAccountBodySchema>;
 

@@ -24,8 +24,8 @@ AppDataSource.initialize()
   .then(() => console.log("Database connected"))
   .catch((error) => console.error("Database connection error", error));
 
-let userrepo = AppDataSource.getRepository(User)
-let relationshipRepo = AppDataSource.getRepository(Relationship)
+const userrepo = AppDataSource.getRepository(User)
+const relationshipRepo = AppDataSource.getRepository(Relationship)
 
 declare module "express-session" {
   interface SessionData {

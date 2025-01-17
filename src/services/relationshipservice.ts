@@ -1,5 +1,4 @@
 import { Repository } from "typeorm";
-import { AppDataSource } from "../config/db";
 import { Relationship } from "../models/relationship";
 import { User } from "../models/user";
 
