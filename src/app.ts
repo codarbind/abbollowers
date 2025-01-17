@@ -11,10 +11,14 @@ import { AccountService } from "./services/accountservice";
 import { followUser, getFollowers, getFollowing, unfollowUser } from "./controllers/relationshipcontroller";
 import { RelationshipService } from "./services/relationshipservice";
 import { Relationship } from "./models/relationship";
-
+import cors from "cors"
 
 const app = express()
 app.use(express.json())
+app.use(cors( {
+  origin: envconfig.client_url,
+  credentials:true
+}))
 
 AppDataSource.initialize()
   .then(() => console.log("Database connected"))

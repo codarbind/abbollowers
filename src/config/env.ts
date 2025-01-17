@@ -11,6 +11,7 @@ const envSchema = z.object({
     POSTGRES_DB_HOST: z.string(),
     JWT_SECRET:z.string(),
     SESSION_SECRET:z.string(),
+    CLIENT_URL:z.string(),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
 });
 
@@ -24,5 +25,6 @@ export const envconfig = {
     postgres_db:envVars.POSTGRES_DB,
     jwt_secret:envVars.JWT_SECRET,
     session_secret:envVars.SESSION_SECRET,
+    client_url:envVars.CLIENT_URL,
     nodeEnv: envVars.NODE_ENV,
 };
